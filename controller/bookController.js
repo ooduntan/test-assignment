@@ -26,36 +26,32 @@ exports.saveBookData =  (req, res)  => {
 }
 
 function validateUserData(bookData) {
-  const { name = '', email = '', phone = '', branch = '', password = '', gender = '', roleId = '' } = bookData;
+  const { name = '', author = '', isbn = '', numberOfBooks = '', datePublished = '', category = '', numberOfBooksIssued = '' } = bookData;
   let errorBox = [];
 
   if(!validator.isLength(name, 2)) {
     errorBox.push('name')
   }
 
-  if (!validator.isEmail(email)) {
-    errorBox.push('email')
+  if(!validator.isLength(author, 2)) {
+    errorBox.push('author')
   }
 
-  if (!validator.isLength(phone, 7)) {
-    errorBox.push('phone')
+  if (!validator.isNumeric(numberOfBooks)) {
+    errorBox.push('numberOfBooks')
+  }
+  if (!validator.isNumeric(numberOfBooksIssued)) {
+    errorBox.push('numberOfBooksIssued')
   }
 
-  if (!validator.isNumeric(branch)) {
-    errorBox.push('branch')
+  if(!validator.isLength(category, 2)) {
+    errorBox.push('category')
   }
 
-  if (!validator.isNumeric(gender)) {
-    errorBox.push('gender')
+  if (!validator.isLength(datePublished, 2)) {
+    errorBox.push('datePublished')
   }
 
-  if (!validator.isNumeric(roleId)) {
-    errorBox.push('roleId')
-  }
-
-  if (!validator.isLength(password, 6)) {
-    errorBox.push('password')
-  }
 
   return errorBox;
 }
