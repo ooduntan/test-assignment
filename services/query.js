@@ -30,10 +30,21 @@ exports.batchSaveQuery = function(modelObj, dataArray, cb) {
  * @param  {Object}   searchQuery [Search query]
  * @param  {Function} cb          [Passes result to callback]
  */
-exports.findQuery = function(modelObj, searchQuery, cb) {
-  modelObj.find(searchQuery, function(err, data) {
-    return err ? cb(false, err) : cb(true, data);
-  });
+exports.findQuery = function(modelObj, searchQuery, cb, populate = '') {
+  if (!!populate) {
+    modelObj.find(searchQuery)
+    .populate(populate)
+    .exec(function(err, data) {
+      return err ? cb(false, err) : cb(true, data);
+    });
+    console.log('populatepopulatepopulate')
+  } else {
+    console.log('skdhjksjdkskdksjj', !!populate, populate)
+
+    modelObj.find(searchQuery, function(err, data) {
+      return err ? cb(false, err) : cb(true, data);
+    });
+  }
 }
 
 /**

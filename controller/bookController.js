@@ -16,9 +16,9 @@ exports.saveBookData =  (req, res)  => {
   if (errorReport.length) {
     return res.send({message: `Invalid User data in the following field ${errorReport.join(', ')}`})
   }
-  bookService.save(req.body, (status, err) => {
+  bookService.saveBooks(req.body, (status, response) => {
     if (status) {
-      return utils.dataResponder(res, true, result, 'book', 200);
+      return utils.dataResponder(res, true, response, 'book', 200);
     }
     const result = `The following error occurred while creating user: ${err}`
     utils.messageResponder(res, false, result, 400);
@@ -29,26 +29,26 @@ function validateUserData(bookData) {
   const { name = '', author = '', isbn = '', numberOfBooks = '', datePublished = '', category = '', numberOfBooksIssued = '' } = bookData;
   let errorBox = [];
 
-  if(!validator.isLength(name, 2)) {
+  if(!name || !validator.isLength(name, 2)) {
     errorBox.push('name')
   }
 
-  if(!validator.isLength(author, 2)) {
+  if(!author || !validator.isLength(author, 2)) {
     errorBox.push('author')
   }
 
-  if (!validator.isNumeric(numberOfBooks)) {
+  if (!numberOfBooks || !validator.isNumeric(numberOfBooks)) {
     errorBox.push('numberOfBooks')
   }
-  if (!validator.isNumeric(numberOfBooksIssued)) {
+  if (!numberOfBooksIssued && !validator.isNumeric(numberOfBooksIssued)) {
     errorBox.push('numberOfBooksIssued')
   }
 
-  if(!validator.isLength(category, 2)) {
+  if(!category || !validator.isNumeric(category)) {
     errorBox.push('category')
   }
 
-  if (!validator.isLength(datePublished, 2)) {
+  if (!datePublished || !validator.isLength(datePublished, 2)) {
     errorBox.push('datePublished')
   }
 

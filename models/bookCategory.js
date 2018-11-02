@@ -11,8 +11,8 @@ var BookCategorySchema = new modelAsset.schema({
 });
 
 modelAsset.aiPlugin(BookCategorySchema, {
-  model: 'category',
+  model: 'categories',
   startAt: 1
 });
 
-module.exports = modelAsset.model('category', BookCategorySchema);
+module.exports = modelAsset.model('categories', BookCategorySchema);

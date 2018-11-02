@@ -41,7 +41,7 @@ exports.findAndUpdateOneUser = function(userInfo, id, cb) {
  * @param  {Function} cb         [Passes result to callback]
  */
 exports.findBooks = function(searchTerm, cb) {
-  query.findQuery(bookModel, searchTerm, cb);
+  query.findQuery(bookModel, searchTerm, cb, 'category');
 }
 
 /**

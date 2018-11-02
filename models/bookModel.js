@@ -27,7 +27,8 @@ var BooksSchema = new modelAsset.schema({
     required: true
   },
   category: {
-    type: String,
+    type: Number,
+    ref: 'categories'
   },
   numberOfBooksIssued: {
     type: Number,
