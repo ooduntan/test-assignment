@@ -69,14 +69,18 @@ exports.getCategories = (req, res) => {
  * Edit books
  */
 exports.editBooks = (req, res)  => {
-  const { bookId } = req.body
-  if(!!bookId || !validator.isNumeric(bookId)) {
+  const { id } = req.body
+  console.log(id, 'kjjkkjkjk');
+
+  if(isNaN(id)) {
     return utils.messageResponder(res, false, `Invalid book id`, 400)
   }
 
-  bookService.updateOneBook(bookId, req.body, (status, result) => {
+  bookService.updateOneBook(id, req.body, (status, result) => {
+    console.log(status, result, 'status, result');
+
     if(status) {
-      return utils.messageResponder(res, true, result, 200)
+      return utils.dataResponder(res, true, result, 'book', 200);
     }
 
     return utils.messageResponder(res, false, result, 400)

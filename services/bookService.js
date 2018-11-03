@@ -61,6 +61,6 @@ exports.findCategory = function(searchTerm, cb) {
  * @param {Function} cb       [Passes result to callback]
  */
 exports.updateOneBook = function(id, bookData, cb) {
-  query.updateQuery(bookModel, id, bookData, cb);
+  query.updateQuery(bookModel, {_id: id}, bookData, cb);
 }
 
